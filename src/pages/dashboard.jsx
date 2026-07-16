@@ -376,10 +376,21 @@ function Dashboard() {
                             {/* Task Details */}
                             <div>
 
-                                <h2 className="text-xl font-bold text-slate-800">
-                                    {item.task}
-                                </h2>
+                                {editId === item.id ? (
 
+                                    <input
+                                        type="text"
+                                        value={editTask}
+                                        onChange={(e) => setEditTask(e.target.value)}
+                                        className="w-full rounded-xl border p-3 text-lg  outline-none focus:ring-2 focus:ring-blue-500" />
+
+                                ) : (
+
+                                    <h2 className="text-xl font-bold text-slate-800">
+                                        {item.task}
+                                    </h2>
+
+                                )}
 
                                 <div className="mt-4">
 
@@ -413,16 +424,66 @@ function Dashboard() {
                                     Change Status
                                 </button>
 
+                                {editId === item.id ? (
 
-                                <button
-                                    onClick={() => {
-                                        setEditId(item.id);
-                                        setEditTask(item.task);
-                                    }}
-                                    className="rounded-xl bg-yellow-500 px-5 py-2 font-medium text-white transition hover:bg-yellow-600"
-                                >
-                                    Edit
-                                </button>
+                                    <>
+                                        <button
+                                            onClick={() => handleEdit(item.id)}
+                                            className="
+                rounded-xl 
+                bg-green-600 
+                px-5 
+                py-2 
+                font-medium 
+                text-white
+                hover:bg-green-700
+            "
+                                        >
+                                            Save
+                                        </button>
+
+
+                                        <button
+                                            onClick={() => {
+                                                setEditId(null);
+                                                setEditTask("");
+                                            }}
+                                            className="
+                rounded-xl 
+                bg-gray-500 
+                px-5 
+                py-2 
+                font-medium 
+                text-white
+                hover:bg-gray-600
+            "
+                                        >
+                                            Cancel
+                                        </button>
+
+                                    </>
+
+                                ) : (
+
+                                    <button
+                                        onClick={() => {
+                                            setEditId(item.id);
+                                            setEditTask(item.task);
+                                        }}
+                                        className="
+            rounded-xl 
+            bg-yellow-500 
+            px-5 
+            py-2 
+            font-medium 
+            text-white
+            hover:bg-yellow-600
+        "
+                                    >
+                                        Edit
+                                    </button>
+
+                                )}
 
 
                                 <button
